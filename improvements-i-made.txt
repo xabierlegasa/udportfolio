@@ -1,15 +1,34 @@
-I've optimized project-webperf.html page
+I've optimized project-webperf.html page from the cloned repo in my server:
+http://x.xabierlegasa.com/udportfolio/project-webperf.html
 
 
 
 - MEASURE FIRST, OPTIMIZE SECOND.
     Tested page at http://www.webpagetest.org/
-        First View (3.276s)
-        Repeat View (0.135s)
+        First View (1.719s)
+        Repeat View (0.391s)
     Tested page at https://developers.google.com/speed/pagespeed/insights
 
+    Before: http://www.webpagetest.org/result/150403_5A_GCJ/
+    After: 
 
 - print.css is only necessary for printing. Added media print:
     <link href="css/print.css" rel="stylesheet" media="print">
 
-- Image was 94.6% of the content: 
+- Put inline style.css code to avoid an extra roundtrip:
+
+- Images is 94.6% of the content:
+    Compress 2 photos we are using.
+
+        -rw-r--r--   1 xabier  staff  267932 Apr  3 12:00 cam_be_like.jpg
+        -rw-r--r--   1 xabier  staff  231187 Apr  3 11:58 cam_be_like_compressed.jpg
+        -rw-r--r--   1 xabier  staff   14399 Apr  3 09:59 profilepic.jpg
+        -rw-r--r--   1 xabier  staff    4658 Apr  3 12:01 profilepic_compressed.jpg
+
+    62% saving in profilepic.jpg (14.3 KB -> 4.7 KB)
+    13% saving in cam_be_like.jpg (267 KB -> 231 KB)
+
+- html page is 2.4 KB, so < 14 KB, so we can not optimize this :)
+
+- make analytics.js file async
+    <script async src="http://www.google-analytics.com/analytics.js"></script>
