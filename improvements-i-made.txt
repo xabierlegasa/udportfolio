@@ -1,7 +1,19 @@
-I've optimized project-webperf.html page from the cloned repo in my server:
+Optimized page:
 http://x.xabierlegasa.com/udportfolio/project-webperf.html
 
+                         Before      After
+PageSpeed Insights
+    Mobile               75/100      88/100
+    Desktop              99/100      99/100
+WebTestingPages
+    Load time            1.415s      1.081s
+    First Byte           0.547s      0.269s
+    Render start         0.993s      0.493s
+    Requests             8           7
+    Visually complete    1.400s      0.700s
 
+    Before: http://www.webpagetest.org/result/150403_7P_HTY/1/details/
+    After:  http://www.webpagetest.org/result/150403_Q3_H6A/1/details/
 
 - MEASURE FIRST, OPTIMIZE SECOND.
     Tested page at http://www.webpagetest.org/
@@ -10,7 +22,7 @@ http://x.xabierlegasa.com/udportfolio/project-webperf.html
     Tested page at https://developers.google.com/speed/pagespeed/insights
 
     Before: http://www.webpagetest.org/result/150403_5A_GCJ/
-    After: 
+    After: http://www.webpagetest.org/result/150403_2V_GFK/
 
 - print.css is only necessary for printing. Added media print:
     <link href="css/print.css" rel="stylesheet" media="print">
@@ -32,3 +44,20 @@ http://x.xabierlegasa.com/udportfolio/project-webperf.html
 
 - make analytics.js file async
     <script async src="http://www.google-analytics.com/analytics.js"></script>
+
+- It appears my nginx was not setting expiration date for css and js files.
+    I added this to my nginx virtualhost file configuration:
+
+       # Media: images, icons, video, audio, HTC
+        location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {
+            expires 30d;
+            access_log off;
+            add_header Cache-Control "public";
+        }
+
+        # CSS and Javascript
+        location ~* \.(?:css|js)$ {
+            expires 2d;
+            access_log off;
+            add_header Cache-Control "public";
+        }
