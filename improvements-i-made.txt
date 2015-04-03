@@ -1,0 +1,15 @@
+I've optimized project-webperf.html page
+
+
+
+- MEASURE FIRST, OPTIMIZE SECOND.
+    Tested page at http://www.webpagetest.org/
+        First View (3.276s)
+        Repeat View (0.135s)
+    Tested page at https://developers.google.com/speed/pagespeed/insights
+
+
+- print.css is only necessary for printing. Added media print:
+    <link href="css/print.css" rel="stylesheet" media="print">
+
+- Image was 94.6% of the content: 
